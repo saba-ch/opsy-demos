@@ -25,11 +25,12 @@ resource "helm_release" "karpenter" {
   name       = "karpenter"
   repository = "oci://public.ecr.aws/karpenter"
   chart      = "karpenter"
-  version    = "1.4.0"
+  version    = "1.8.5"
   wait       = false
 
   values = [
     <<-EOT
+    replicas: 1
     settings:
       clusterName: ${module.eks.cluster_name}
       clusterEndpoint: ${module.eks.cluster_endpoint}
